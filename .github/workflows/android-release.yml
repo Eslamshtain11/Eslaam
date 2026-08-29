@@ -19,11 +19,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
-          cache: gradle
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -36,6 +35,11 @@ jobs:
           unzip -q organic-lab---3d-exam-simulator.zip -d build-src
           test -f build-src/settings.gradle.kts
           test -f build-src/app/build.gradle.kts
+
+      - name: Set up Gradle 9.3.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
 
       - name: Generate temporary release keystore
         working-directory: build-src
